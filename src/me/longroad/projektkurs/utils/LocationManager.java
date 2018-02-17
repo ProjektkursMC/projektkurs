@@ -17,6 +17,8 @@ public class LocationManager {
 	
 	private Map<String, Location> startPoints, endPoints;
 	
+	private Location globalStart, globalEnd;
+	
 	public static LocationManager getInstance() {
 		if(instance == null)
 			instance = new LocationManager();
@@ -52,4 +54,19 @@ public class LocationManager {
 		return endPoints.get(p.getName());
 	}
 	
+	public void setGlobalStart(Location loc) {
+		globalStart = loc;
+	}
+	
+	public void setGlobalEnd(Location loc) {
+		globalEnd = loc;
+	}
+	
+	public Location getGlobalStart() {
+		return globalStart;
+	}
+	
+	public Location getGlobalEnd() {
+		return globalEnd;
+	}
 }
