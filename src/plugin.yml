@@ -4,3 +4,6 @@ version: 1.0
 main: me.longroad.projektkurs.Main
 
 commands:
+  startpoint:
+  endpoint:
+  gm:

@@ -8,6 +8,8 @@ package me.longroad.projektkurs;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.longroad.projektkurs.commands.EndPointCommand;
+import me.longroad.projektkurs.commands.GamemodeCommand;
 import me.longroad.projektkurs.commands.StartPointCommand;
 import me.longroad.projektkurs.listener.InteractListener;
 import me.longroad.projektkurs.listener.MoveListener;
@@ -23,6 +25,8 @@ public class Main extends JavaPlugin{
 		instance = this;
 		
 		this.getCommand("startpoint").setExecutor(new StartPointCommand());
+		this.getCommand("endpoint").setExecutor(new EndPointCommand());
+		this.getCommand("gm").setExecutor(new GamemodeCommand());
 		
 		Bukkit.getPluginManager().registerEvents(new MoveListener(), this);
 		Bukkit.getPluginManager().registerEvents(interactListener = new InteractListener(), this);

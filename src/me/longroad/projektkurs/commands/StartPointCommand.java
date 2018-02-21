@@ -5,6 +5,7 @@
  */
 package me.longroad.projektkurs.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,11 +31,15 @@ public class StartPointCommand implements CommandExecutor {
 		if(sender instanceof Player) {
 			Player p = (Player) sender;
 			if(args.length == 1){
-				if(args[0].equalsIgnoreCase("global")) 
+				if(args[0].equalsIgnoreCase("global")) {
 					Main.getInstance().getInteractListener().listenGlobal(p, InteractListener.PointType.START);
+					p.sendMessage(ChatColor.GREEN + "Rechtsklicke den Block von dem du starten möchtest!");
+				}
 			}
-			else 
+			else {
 				Main.getInstance().getInteractListener().listen(p, InteractListener.PointType.START);
+				p.sendMessage(ChatColor.GREEN + "Rechtsklicke den Block von dem du starten möchtest!");
+			}
 		}
 		
 		return false;

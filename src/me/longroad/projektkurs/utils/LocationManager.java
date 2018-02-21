@@ -69,4 +69,16 @@ public class LocationManager {
 	public Location getGlobalEnd() {
 		return globalEnd;
 	}
+	
+	public boolean hasGlobalStart() {
+		if(globalStart == null)
+			return false;
+		return true;
+	}
+	
+	public boolean hasGlobalEnd() {
+		if(globalEnd == null)
+			return false;
+		return true;
+	}
 }
