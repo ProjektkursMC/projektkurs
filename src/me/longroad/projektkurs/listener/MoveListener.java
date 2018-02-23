@@ -5,9 +5,10 @@
  */
 package me.longroad.projektkurs.listener;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,25 +21,24 @@ import net.md_5.bungee.api.ChatColor;
 
 public class MoveListener implements Listener {
 
-	private List<String> list = new ArrayList<>();
-
+	private Map<String, Location> map = new HashMap<>();
+	
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
 
 		if (LocationManager.getInstance().hasStartPoint(p) && LocationManager.getInstance().hasEndPoint(p)) {
 			if (e.getTo().getBlock().getRelative(BlockFace.DOWN).getLocation()
-					.equals(LocationManager.getInstance().getStartPoint(p)) && !list.contains(p.getName())) {
+					.equals(LocationManager.getInstance().getStartPoint(p)) && !map.containsKey(p.getName())) {
 				Timer.getInstance().start(p);
 				p.sendMessage(ChatColor.GREEN + "Zeit wird genommen...");
-				list.add(p.getName());
+				map.put(p.getName(), p.getLocation());
 
 			} else if (e.getTo().getBlock().getRelative(BlockFace.DOWN).getLocation()
-					.equals(LocationManager.getInstance().getEndPoint(p)) && list.contains(p.getName())) {
+					.equals(LocationManager.getInstance().getEndPoint(p)) && map.containsKey(p.getName())) {
 				long time = Timer.getInstance().stop(p);
 				double seconds = time / 1000.0;
-				double distance = LocationManager.getInstance().getStartPoint(p)
-						.distance(LocationManager.getInstance().getEndPoint(p));
+				double distance = p.getLocation().distance(map.get(p.getName()));
 
 				double v = distance / seconds;
 
@@ -46,26 +46,22 @@ public class MoveListener implements Listener {
 				p.sendMessage(ChatColor.GRAY + "  -  Sekunden: " + ChatColor.GREEN + seconds + "s");
 				p.sendMessage(ChatColor.GRAY + "  -  Distanz: " + ChatColor.GREEN + distance + "m");
 				p.sendMessage(ChatColor.GRAY + "  -  Weg/Zeit: " + ChatColor.GREEN + v + "m/s");
-				list.remove(p.getName());
+				map.remove(p.getName());
 			}
 		}
 		
-		System.out.println(LocationManager.getInstance().hasGlobalStart());
-		System.out.println(LocationManager.getInstance().hasGlobalEnd());
 		if (LocationManager.getInstance().hasGlobalStart() && LocationManager.getInstance().hasGlobalEnd()) {
-			System.out.println("triggered");
 			if (e.getTo().getBlock().getRelative(BlockFace.DOWN).getLocation()
-					.equals(LocationManager.getInstance().getGlobalStart()) && !list.contains(p.getName())) {
+					.equals(LocationManager.getInstance().getGlobalStart()) && !map.containsKey(p.getName())) {
 				Timer.getInstance().start(p);
 				p.sendMessage(ChatColor.GREEN + "Zeit wird genommen...");
-				list.add(p.getName());
+				map.put(p.getName(), p.getLocation());
 				
 			} else if (e.getTo().getBlock().getRelative(BlockFace.DOWN).getLocation()
-					.equals(LocationManager.getInstance().getGlobalEnd()) && list.contains(p.getName())) {
+					.equals(LocationManager.getInstance().getGlobalEnd()) && map.containsKey(p.getName())) {
 				long time = Timer.getInstance().stop(p);
 				double seconds = time / 1000.0;
-				double distance = LocationManager.getInstance().getGlobalStart()
-						.distance(LocationManager.getInstance().getGlobalEnd());
+				double distance = p.getLocation().distance(map.get(p.getName()));
 
 				double v = distance / seconds;
 
@@ -73,7 +69,7 @@ public class MoveListener implements Listener {
 				p.sendMessage(ChatColor.GRAY + "  -  Sekunden: " + ChatColor.GREEN + seconds + "s");
 				p.sendMessage(ChatColor.GRAY + "  -  Distanz: " + ChatColor.GREEN + distance + "m");
 				p.sendMessage(ChatColor.GRAY + "  -  Weg/Zeit: " + ChatColor.GREEN + v + "m/s");
-				list.remove(p.getName());
+				map.remove(p.getName());
 				
 			}
 		}

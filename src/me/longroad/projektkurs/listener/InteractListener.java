@@ -46,10 +46,11 @@ public class InteractListener implements Listener {
 		
 		} else if(map.containsKey("global_" + e.getPlayer().getName())) {
 			if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-				if(map.get(e.getPlayer().getName()) == PointType.START)
+				if(map.get("global_" + e.getPlayer().getName()) == PointType.START) 
 					LocationManager.getInstance().setGlobalStart(e.getClickedBlock().getLocation());
-				else
+				 else 
 					LocationManager.getInstance().setGlobalEnd(e.getClickedBlock().getLocation());
+				
 				e.getPlayer().sendMessage(ChatColor.GREEN + "Location erfolgreich gesetzt!");
 				map.remove("global_" + e.getPlayer().getName());
 			}
