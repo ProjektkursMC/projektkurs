@@ -1,9 +1,9 @@
 /**
- *  @author longroad
+ *  @author Lennart
  *	@version 1.0
  *	Created on 17.02.2018.
  */
-package me.longroad.projektkurs.listener;
+package me.projektkurs.listener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import me.longroad.projektkurs.utils.LocationManager;
+import me.projektkurs.utils.LocationManager;
 
 public class InteractListener implements Listener {
 

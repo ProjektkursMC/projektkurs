@@ -1,9 +1,9 @@
 /**
- *  @author longroad
+ *  @author Lennart
  *	@version 1.0
  *	Created on 17.02.2018.
  */
-package me.longroad.projektkurs.commands;
+package me.projektkurs.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,8 +11,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.longroad.projektkurs.Main;
-import me.longroad.projektkurs.listener.InteractListener;
+import me.projektkurs.Main;
+import me.projektkurs.listener.InteractListener;
 
 public class StartPointCommand implements CommandExecutor {
 

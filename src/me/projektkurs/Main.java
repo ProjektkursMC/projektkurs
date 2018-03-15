@@ -1,18 +1,18 @@
 /**
- *  @author longroad
+ *  @author Lennart
  *	@version 1.0
  *	Created on 14.02.2018.
  */
-package me.longroad.projektkurs;
+package me.projektkurs;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.longroad.projektkurs.commands.EndPointCommand;
-import me.longroad.projektkurs.commands.GamemodeCommand;
-import me.longroad.projektkurs.commands.StartPointCommand;
-import me.longroad.projektkurs.listener.InteractListener;
-import me.longroad.projektkurs.listener.MoveListener;
+import me.projektkurs.commands.EndPointCommand;
+import me.projektkurs.commands.GamemodeCommand;
+import me.projektkurs.commands.StartPointCommand;
+import me.projektkurs.listener.InteractListener;
+import me.projektkurs.listener.MoveListener;
 
 public class Main extends JavaPlugin{
 

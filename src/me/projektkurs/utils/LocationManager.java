@@ -1,9 +1,9 @@
 /**
- *  @author longroad
+ *  @author Lennart
  *	@version 1.0
  *	Created on 17.02.2018.
  */
-package me.longroad.projektkurs.utils;
+package me.projektkurs.utils;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,9 +1,9 @@
 /**
- *  @author longroad
+ *  @author Lennart
  *	@version 1.0
  *	Created on 18.02.2018.
  */
-package me.longroad.projektkurs.commands;
+package me.projektkurs.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;

@@ -1,7 +1,7 @@
 name: Projektkurs
-author: longroad
+author: Lennart
 version: 1.0
-main: me.longroad.projektkurs.Main
+main: me.projektkurs.Main
 
 commands:
   startpoint:

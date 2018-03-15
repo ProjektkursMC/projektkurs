@@ -1,9 +1,9 @@
 /**
- *  @author longroad
+ *  @author Lennart
  *	@version 1.0
  *	Created on 17.02.2018.
  */
-package me.longroad.projektkurs.listener;
+package me.projektkurs.listener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +15,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import me.longroad.projektkurs.utils.LocationManager;
-import me.longroad.projektkurs.utils.Timer;
+import me.projektkurs.utils.LocationManager;
+import me.projektkurs.utils.Timer;
 import net.md_5.bungee.api.ChatColor;
 
 public class MoveListener implements Listener {
