@@ -32,6 +32,12 @@ public class Timer {
 	
 	public long stop(Player p) {
 		long time = System.currentTimeMillis() - map.get(p.getName());
+		map.remove(p.getName());
+		return time;
+	}
+	
+	public long round(Player p) {
+		long time = System.currentTimeMillis() - map.get(p.getName());
 		return time;
 	}
 }
