@@ -8,4 +8,7 @@ commands:
   endpoint:
   gm:
   gravity:
+  gravityblock:
   ride:
+  pitch:
+  test:

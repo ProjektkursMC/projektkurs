@@ -8,13 +8,13 @@ package me.projektkurs.listener;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import me.projektkurs.Main;
 import me.projektkurs.utils.LocationManager;
@@ -76,73 +76,35 @@ public class MoveListener implements Listener {
 			}
 		}
 	}
-	
+
 	public void gravity(Player p) {
 		Timer.getInstance().start(p);
 		map.put(p.getName(), p.getLocation());
-		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				long time = Timer.getInstance().round(p);
-				double seconds = time / 1000.0;
-				double distance = p.getLocation().distance(map.get(p.getName()));
 
-				p.sendMessage(ChatColor.GREEN + "Nach einer Sekunde: ");
-				p.sendMessage(ChatColor.GRAY + "  -  Sekunden: " + ChatColor.GREEN + seconds + "s");
-				p.sendMessage(ChatColor.GRAY + "  -  Distanz: " + ChatColor.GREEN + distance + "m");
-				p.sendMessage("");
-			}}, 20);
-		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				long time = Timer.getInstance().round(p);
-				double seconds = time / 1000.0;
-				double distance = p.getLocation().distance(map.get(p.getName()));
-				p.sendMessage(ChatColor.GREEN + "Nach zwei Sekunden: ");
-				p.sendMessage(ChatColor.GRAY + "  -  Sekunden: " + ChatColor.GREEN + seconds + "s");
-				p.sendMessage(ChatColor.GRAY + "  -  Distanz: " + ChatColor.GREEN + distance + "m");
-				p.sendMessage("");
-			}}, 2 * 20);
-		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				long time = Timer.getInstance().round(p);
-				double seconds = time / 1000.0;
-				double distance = p.getLocation().distance(map.get(p.getName()));
+		BukkitRunnable runnable = new BukkitRunnable() {
 
-				p.sendMessage(ChatColor.GREEN + "Nach drei Sekunden: ");
-				p.sendMessage(ChatColor.GRAY + "  -  Sekunden: " + ChatColor.GREEN + seconds + "s");
-				p.sendMessage(ChatColor.GRAY + "  -  Distanz: " + ChatColor.GREEN + distance + "m");
-				p.sendMessage("");
-			}}, 3 * 20);
-		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
 			@Override
 			public void run() {
-				long time = Timer.getInstance().round(p);
-				double seconds = time / 1000.0;
-				double distance = p.getLocation().distance(map.get(p.getName()));
+				if (!test(p))
+					this.cancel();
+			}
+		};
+		runnable.runTaskTimerAsynchronously(Main.getInstance(), 0, 20);
+	}
 
-				p.sendMessage(ChatColor.GREEN + "Nach fünf Sekunden: ");
-				p.sendMessage(ChatColor.GRAY + "  -  Sekunden: " + ChatColor.GREEN + seconds + "s");
-				p.sendMessage(ChatColor.GRAY + "  -  Distanz: " + ChatColor.GREEN + distance + "m");
-				p.sendMessage("");
-			}}, 5 * 20);
-		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				long time = Timer.getInstance().round(p);
-				double seconds = time / 1000.0;
-				double distance = p.getLocation().distance(map.get(p.getName()));
+	public boolean test(Player p) {
+		if (p.isOnGround())
+			return false;
+		long time = Timer.getInstance().round(p);
+		double seconds = time / 1000.0;
+		double distance = p.getLocation().distance(map.get(p.getName()));
+		double gravity = (2 * distance) / (seconds * seconds);
 
-				p.sendMessage(ChatColor.GREEN + "Nach zehn Sekunden: ");
-				p.sendMessage(ChatColor.GRAY + "  -  Sekunden: " + ChatColor.GREEN + seconds + "s");
-				p.sendMessage(ChatColor.GRAY + "  -  Distanz: " + ChatColor.GREEN + distance + "m");
-				p.sendMessage("");
-			}}, 10 * 20);
+		p.sendMessage(ChatColor.GREEN + "Nach " + seconds + " Sekunden: ");
+		p.sendMessage(ChatColor.GRAY + "  -  Sekunden: " + ChatColor.GREEN + seconds + "s");
+		p.sendMessage(ChatColor.GRAY + "  -  Distanz: " + ChatColor.GREEN + distance + "m");
+		p.sendMessage(ChatColor.GRAY + "  -  Gravitation: " + ChatColor.GREEN + gravity + "m/s^2");
+		p.sendMessage("");
+		return true;
 	}
 }

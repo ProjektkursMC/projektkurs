@@ -10,11 +10,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.projektkurs.commands.EndPointCommand;
 import me.projektkurs.commands.GamemodeCommand;
+import me.projektkurs.commands.GravityBlockCommand;
 import me.projektkurs.commands.GravityCommand;
+import me.projektkurs.commands.PitchCommand;
+import me.projektkurs.commands.ProjectileTestCommand;
 import me.projektkurs.commands.RideCommand;
 import me.projektkurs.commands.StartPointCommand;
 import me.projektkurs.listener.InteractListener;
 import me.projektkurs.listener.MoveListener;
+import me.projektkurs.listener.ProjectileListener;
 import me.projektkurs.listener.RedstoneListener;
 
 public class Main extends JavaPlugin{
@@ -24,6 +28,7 @@ public class Main extends JavaPlugin{
 	private InteractListener interactListener;
 	private MoveListener moveListener;
 	private RedstoneListener redstoneListener;
+	private ProjectileListener projectileListener;
 	
 	@Override
 	public void onEnable() {
@@ -33,12 +38,16 @@ public class Main extends JavaPlugin{
 		this.getCommand("endpoint").setExecutor(new EndPointCommand());
 		this.getCommand("gm").setExecutor(new GamemodeCommand());
 		this.getCommand("gravity").setExecutor(new GravityCommand());
+		this.getCommand("gravityblock").setExecutor(new GravityBlockCommand());
 		this.getCommand("ride").setExecutor(new RideCommand());
+		this.getCommand("pitch").setExecutor(new PitchCommand());
+		this.getCommand("test").setExecutor(new ProjectileTestCommand());
 
 		
 		Bukkit.getPluginManager().registerEvents(moveListener = new MoveListener(), this);
 		Bukkit.getPluginManager().registerEvents(interactListener = new InteractListener(), this);
 		Bukkit.getPluginManager().registerEvents(redstoneListener = new RedstoneListener(), this);
+		Bukkit.getPluginManager().registerEvents(projectileListener = new ProjectileListener(), this);
 	}
 	
 	@Override
@@ -61,5 +70,9 @@ public class Main extends JavaPlugin{
 	
 	public RedstoneListener getRedstoneListener() {
 		return redstoneListener;
+	}
+	
+	public ProjectileListener getProjectileListener() {
+		return projectileListener;
 	}
 }
